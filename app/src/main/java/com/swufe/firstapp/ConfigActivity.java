@@ -42,8 +42,27 @@ public class ConfigActivity extends AppCompatActivity {
 
     public void save(View btn){
         Log.i(TAG,"save:");
+        //获取新的值
+        float newDollar = Float.parseFloat(dollarText.getText().toString());
+        float newEuro = Float.parseFloat(euroText.getText().toString());
+        float newWon = Float.parseFloat(wonText.getText().toString());
 
+        Log.i(TAG,"save:获取到新的值");
+        Log.i(TAG,"save:newDollar=" + newDollar);
+        Log.i(TAG,"save:newEuro=" + newEuro);
+        Log.i(TAG,"save:newWon=" + newWon);
 
+        //保存到Bundle或放入到Extra
+        Intent intent = getIntent();
+        Bundle bd1 = new Bundle();
+        bd1.putFloat("key_dollar",newDollar);
+        bd1.putFloat("key_euro",newEuro);
+        bd1.putFloat("key_won",newWon);
+        intent.putExtras(bd1);
+        setResult(2,intent);
+
+        //返回调用界面
+        finish();
 
     }
 }

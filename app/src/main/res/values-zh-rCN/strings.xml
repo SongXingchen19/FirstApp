@@ -19,4 +19,6 @@
     <string name="btn_euro_label">欧元</string>
     <string name="btn_won_label">韩元</string>
     <string name="rmb_hint">input RMB</string>
+    <string name="btn_opencfg_label">Config</string>
+    <string name="btn_save_label">Save</string>
 </resources>

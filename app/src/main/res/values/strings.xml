@@ -11,7 +11,13 @@
     <string name="lable_add1">+3POINTS</string>
     <string name="lable_add2">+2POINTS</string>
     <string name="lable_add3">+1POINTS</string>
-    <string name="reset">RESET</string>
+    <string name="btn_reset">RESET</string>
     <string name="score">0</string>
+
+    <string name="btn_dollar_label">Dollar</string>
+    <string name="btn_euro_label">Euro</string>
+    <string name="btn_won_label">Won</string>
+    <string name="rmb_hint">input RMB</string>
+
 
 </resources>

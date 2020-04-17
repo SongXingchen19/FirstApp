@@ -20,6 +20,7 @@
     <string name="rmb_hint">input RMB</string>
     <string name="btn_opencfg_label">Config</string>
     <string name="btn_save_label">Save</string>
+    <string name="menu_set_lebel">setting</string>
 
 
 </resources>

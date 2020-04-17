@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">1号app</string>
+    <string name="title_activity_second">2号app</string>
+    <string name="str">你好</string>
+    <string name="btn_label">转换为华氏度</string>
+    <string name="showText">转换后的温度是</string>
+    <string name="textTitle">温度转换（摄氏→华氏）</string>
+    <string name="inpText">请输入摄氏度</string>
+    <string name="teamname1">TeamA</string>
+    <string name="teamname2">TeamB</string>
+    <string name="lable_add1">+3分</string>
+    <string name="lable_add2">+2分</string>
+    <string name="lable_add3">+1分</string>
+    <string name="reset">清零</string>
+    <string name="score">0</string>
+</resources>

@@ -149,6 +149,6 @@
         android:layout_marginBottom="146dp"
         android:background="@android:color/holo_orange_dark"
         android:onClick="reset"
-        android:text="@string/reset" />
+        android:text="@string/btn_reset" />
 
 </RelativeLayout>

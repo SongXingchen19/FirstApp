@@ -21,6 +21,29 @@ public class SecondActivity extends AppCompatActivity {
     }
 
 
+    //横竖屏中介，保存数据等
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String scorea = ((TextView)findViewById(R.id.score1)).getText().toString();
+        String scoreb = ((TextView)findViewById(R.id.score2)).getText().toString();
+        outState.putString("teama_score", scorea);
+        outState.putString("teamb_score", scoreb);
+    }
+
+
+    //还原数据
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String scorea = savedInstanceState.getString("teama_score");
+        String scoreb = savedInstanceState.getString("teamb_score");
+
+        ((TextView)findViewById(R.id.score1)).setText(scorea);
+        ((TextView)findViewById(R.id.score2)).setText(scoreb);
+    }
+
+
     public void btnAdd1(View v) {
         if(v.getId()==R.id.button_4)
             showScore(1);
@@ -43,8 +66,12 @@ public class SecondActivity extends AppCompatActivity {
         }
     }
     public void reset(View v) {
-        score.setText("0");
-        score2.setText("0");
+        //score.setText("0");
+        //score2.setText("0");
+        TextView out = (TextView)findViewById(R.id.score1);
+        out.setText("0");
+
+        ((TextView)findViewById(R.id.score2)).setText("0");
     }
     public void showScore(int inc) {
         Log.i("main","inc="+inc);

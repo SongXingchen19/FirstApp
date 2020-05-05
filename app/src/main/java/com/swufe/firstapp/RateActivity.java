@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class RateActivity extends AppCompatActivity implements Runnable{
 
@@ -173,9 +175,16 @@ public class RateActivity extends AppCompatActivity implements Runnable{
         super.onActivityResult(requestCode,resultCode,data);
     }
 
-    @Override
-    public void run() {
-        Log.i(TAG,"run:run()......");
+
+    //定时器，用于（每天更新）
+
+    Timer timer = new Timer();
+    TimerTask timerTask = new TimerTask1();
+    timer.schedule(timerTask,0,86400000);
+    class tmTask extends TimerTask{
+        public void run(){
+            Log.i(TAG,"run:run()......");
+            handler.sendEmptyMessage(4);
             try {
                 Thread.sleep(200);
             } catch (InterruptedException e) {
@@ -183,11 +192,11 @@ public class RateActivity extends AppCompatActivity implements Runnable{
             }
 
 
-        //用于保存获取的汇率
-        Bundle bundle = new Bundle();
+            //用于保存获取的汇率
+            Bundle bundle = new Bundle();
 
 
-        //获取网络数据
+            //获取网络数据
         /*try {
             URL url = new URL("http://www.usd-cny.com/bankofchina.htm");
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
@@ -202,38 +211,38 @@ public class RateActivity extends AppCompatActivity implements Runnable{
             e.printStackTrace();
         }*/
 
-        Document doc = null;
-        try {
-            doc = Jsoup.connect("http://www.usd-cny.com/bankofchina.htm").get();
-            //doc = Jsoup.parse(html);
-            Log.i(TAG,"run:" + doc.title());
-            Elements tables = doc.getElementsByTag("table");
-            int i = 1;
+            Document doc = null;
+            try {
+                doc = Jsoup.connect("http://www.usd-cny.com/bankofchina.htm").get();
+                //doc = Jsoup.parse(html);
+                Log.i(TAG,"run:" + doc.title());
+                Elements tables = doc.getElementsByTag("table");
+                int i = 1;
             /*for (Element table : tables){
                 Log.i(TAG, "run: table["+i+"]=" + table);
                 i++;
             }*/
 
-            Element table6 = tables.get(5);
-            //Log.i(TAG, "run: table6=" + table6);
+                Element table6 = tables.get(5);
+                //Log.i(TAG, "run: table6=" + table6);
 
-            //获取TD中的数据
-            Elements tds = table6.getElementsByTag("td");
-            for (int I=0;I<tds.size();I+=6) {
-                Element td1 = tds.get(I);
-                Element td2 = tds.get(I+5);
-                Log.i(TAG, "run: " + td1.text() + "==>" + td2.text());
-                String str1 = td1.text();
-                String val = td2.text();
+                //获取TD中的数据
+                Elements tds = table6.getElementsByTag("td");
+                for (int I=0;I<tds.size();I+=6) {
+                    Element td1 = tds.get(I);
+                    Element td2 = tds.get(I+5);
+                    Log.i(TAG, "run: " + td1.text() + "==>" + td2.text());
+                    String str1 = td1.text();
+                    String val = td2.text();
 
-                if ("美元".equals(str1)){
-                    bundle.putFloat("dollar-rate",100f/Float.parseFloat(val));
-                }else if ("欧元".equals(str1)){
-                    bundle.putFloat("euro-rate",100f/Float.parseFloat(val));
-                }else if("韩元".equals(str1)){
-                    bundle.putFloat("won-rate",100f/Float.parseFloat(val));
+                    if ("美元".equals(str1)){
+                        bundle.putFloat("dollar-rate",100f/Float.parseFloat(val));
+                    }else if ("欧元".equals(str1)){
+                        bundle.putFloat("euro-rate",100f/Float.parseFloat(val));
+                    }else if("韩元".equals(str1)){
+                        bundle.putFloat("won-rate",100f/Float.parseFloat(val));
+                    }
                 }
-            }
 
             /*for (Element td : tds){
                 Log.i(TAG, "run: td=" + td);
@@ -242,19 +251,23 @@ public class RateActivity extends AppCompatActivity implements Runnable{
             }*/
 
             } catch (IOException ex) {
-            ex.printStackTrace();
+                ex.printStackTrace();
+            }
+
+            //Bundle中保存所获取的汇率
+
+            //获取msg对象，用于返回主线程
+            Message msg = handler.obtainMessage(5);
+            //msg.what = 5;
+            //msg.obj = "hello from run()";
+            msg.obj = bundle;
+            handler.sendMessage(msg);
+
         }
 
-        //Bundle中保存所获取的汇率
-
-        //获取msg对象，用于返回主线程
-        Message msg = handler.obtainMessage(5);
-        //msg.what = 5;
-        //msg.obj = "hello from run()";
-        msg.obj = bundle;
-        handler.sendMessage(msg);
-
     }
+
+
     private String inputStream2String(InputStream InputStream) throws IOException {
         final int bufferSize = 1024;
         final char[] buffer = new char[bufferSize];

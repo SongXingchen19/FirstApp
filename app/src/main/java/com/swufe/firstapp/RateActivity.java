@@ -176,7 +176,7 @@ public class RateActivity extends AppCompatActivity implements Runnable{
         if (item.getItemId()==R.id.menu_set){
             openConfig();
         }else if (item.getItemId()==R.id.open_list){
-            //打开列表窗口
+            //打开列表窗口   RateListActivity或是MyListActivity
             Intent list = new Intent(this, RateListActivity.class);
             startActivity(list);
         }
@@ -282,6 +282,7 @@ public class RateActivity extends AppCompatActivity implements Runnable{
                 String str1 = td1.text();
                 String val = td2.text();
 
+                Log.i(TAG, "run: "+ str1 + "==>" + val);
                 if ("美元".equals(str1)){
                     bundle.putFloat("dollar-rate",100f/Float.parseFloat(val));
                 }else if ("欧元".equals(str1)){

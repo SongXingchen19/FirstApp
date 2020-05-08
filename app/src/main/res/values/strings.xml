@@ -23,5 +23,6 @@
     <string name="menu_set_lebel">setting</string>
     <string name="label_open_list">OpenList</string>
 
+    <string name="keyword_hint">KeyWord</string>
 
 </resources>

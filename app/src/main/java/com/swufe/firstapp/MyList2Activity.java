@@ -80,9 +80,10 @@ public class MyList2Activity extends ListActivity implements Runnable, AdapterVi
     }
 
 
+    //线程方法
     public void run(){
         //
-        List<HashMap<String,String>> retList = new ArrayList<HashMap<String,String>>();
+        List<HashMap<String,String>> rateList = new ArrayList<HashMap<String,String>>();
         Document doc = null;
         try {
             Thread.sleep(1000);      //间隔时间
@@ -107,7 +108,7 @@ public class MyList2Activity extends ListActivity implements Runnable, AdapterVi
                 HashMap<String,String> map = new HashMap<String,String>();
                 map.put("ItemTitle",str1);
                 map.put("ItemDetail",val);
-                retList.add(map);
+                rateList.add(map);
             }
 
         } catch (IOException | InterruptedException ex) {
@@ -115,11 +116,11 @@ public class MyList2Activity extends ListActivity implements Runnable, AdapterVi
         }
 
         Message msg = handler.obtainMessage(7);
-        msg.obj = retList;
+        msg.obj = rateList;
         handler.sendMessage(msg);
     }
 
-    //处理第60行
+    //处理第62行
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 

@@ -23,4 +23,6 @@
     <string name="btn_save_label">Save</string>
     <string name="menu_set_lebel">setting</string>
     <string name="label_open_list">OpenList</string>
+
+    <string name="keyword_hint">关键词</string>
 </resources>

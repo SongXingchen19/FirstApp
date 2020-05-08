@@ -20,6 +20,10 @@ public class MyList2Activity extends ListActivity {
         super.onCreate(savedInstanceState);
         initListView();
         this.setListAdapter(listItemAdapter);
+
+        //使用自定义适配器MyAdapter
+        //MyAdapter myAdapter = new MyAdapter(this,R.layout.list_item,listItems);
+        //this.setListAdapter(myAdapter);
     }
 
     private void initListView(){
@@ -30,7 +34,7 @@ public class MyList2Activity extends ListActivity {
             map.put("ItemDetail","detail" + i);  //详情描述
             listItems.add(map);
         }
-        //生成适配器的Item和动态数组对应的元素    当前创建文，数据源，布局，key，XML中id（主键）
+        //生成适配器的Item和动态数组对应的元素    当前上下文，数据源，布局，key，XML中id（主键）
         listItemAdapter = new SimpleAdapter(this,listItems,  //listItem数据源
                 R.layout.list_item,  //listItem的XML布局实现
                 new String[]{"ItemTitle","ItemDetail"},

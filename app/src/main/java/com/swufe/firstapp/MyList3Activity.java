@@ -145,16 +145,11 @@ public class MyList3Activity extends ListActivity implements Runnable, AdapterVi
         Document doc = null;
 
         try {
-            Thread.sleep(1000);      //间隔时间
+            Thread.sleep(100);      //间隔时间
             doc = Jsoup.connect("https://it.swufe.edu.cn/index/tzgg.htm").get();     //获取网址
             Log.i(TAG,"run:" + doc.title());
-            Elements spans = doc.getElementsByTag("span");
-            Elements buttons = doc.getElementsByTag("button");
-
-            //在第几个span中输入关键词
-            Element span6 = spans.get(1);
-
-
+            String textstr = String.valueOf(R.id.activity_notice_search);
+            int a = textstr.indexOf();
             HashMap<String,String> map = new HashMap<String,String>();
             titleList.add(map);
 

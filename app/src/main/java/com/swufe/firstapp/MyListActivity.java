@@ -1,9 +1,6 @@
 package com.swufe.firstapp;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -24,16 +21,7 @@ public class MyListActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         listView.setEmptyView(findViewById(R.id.nodata));
-        listView.setOnItemClickListener((AdapterView.OnItemClickListener) this);
-
-    }
 
 
-    @Override
-    public void onItemClick(AdapterView<?> listview, View view, int position, long id) {
-        Log.i(TAG, "onItemClick: position=" + position);
-        Log.i(TAG, "onItemClick: parent" + listview);
-        adapter.remove(listview.getItemAtPosition(position));
-        //adapter.notifyDataSetChanged();
     }
 }

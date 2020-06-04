@@ -8,11 +8,10 @@
     android:orientation="vertical"
     tools:context=".MyListActivity">
 
-    <ListView
-        android:id="@+id/mylist"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+    <GridView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:id="@+id/mylist" />
 </LinearLayout>

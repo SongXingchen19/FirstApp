@@ -2,6 +2,7 @@ package com.swufe.firstapp;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,12 +24,15 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MyList3Activity extends ListActivity implements Runnable, AdapterView.OnItemClickListener{
 
@@ -50,15 +55,82 @@ public class MyList3Activity extends ListActivity implements Runnable, AdapterVi
 
         Thread t = new Thread(this);
         t.start();
+         SharedPreferences sharedPreferences = new SharedPreferences() {
+             @Override
+             public Map<String, ?> getAll() {
+                 return null;
+             }
 
+             @Nullable
+             @Override
+             public String getString(String key, @Nullable String defValue) {
+                 return null;
+             }
+
+             @Nullable
+             @Override
+             public Set<String> getStringSet(String key, @Nullable Set<String> defValues) {
+                 return null;
+             }
+
+             @Override
+             public int getInt(String key, int defValue) {
+                 return 0;
+             }
+
+             @Override
+             public long getLong(String key, long defValue) {
+                 return 0;
+             }
+
+             @Override
+             public float getFloat(String key, float defValue) {
+                 return 0;
+             }
+
+             @Override
+             public boolean getBoolean(String key, boolean defValue) {
+                 return false;
+             }
+
+             @Override
+             public boolean contains(String key) {
+                 return false;
+             }
+
+             @Override
+             public Editor edit() {
+                 return null;
+             }
+
+             @Override
+             public void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+
+             }
+
+             @Override
+             public void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+
+             }
+         }
         updateDate = sharedPreferences.getString("update_date","");
 
         //获取当前系统时间
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd EEEE");
         final String todayStr = sdf.format(today);
-        Date beginTime=sdf.parse(todayStr);
-        Date endTime=sdf.parse(updateDate);
+        Date beginTime= null;
+        try {
+            beginTime = sdf.parse(todayStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date endTime= null;
+        try {
+            endTime = sdf.parse(updateDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         //判断时间
         if (((endTime.getTime() - beginTime.getTime())/(24*60*60*1000))>=7){
@@ -149,7 +221,7 @@ public class MyList3Activity extends ListActivity implements Runnable, AdapterVi
             doc = Jsoup.connect("https://it.swufe.edu.cn/index/tzgg.htm").get();     //获取网址
             Log.i(TAG,"run:" + doc.title());
             String textstr = String.valueOf(R.id.activity_notice_search);
-            int a = textstr.indexOf();
+            int a = textstr.indexOf("通告");
             HashMap<String,String> map = new HashMap<String,String>();
             titleList.add(map);
 
